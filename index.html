@@ -1,68 +1,107 @@
- 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <link rel="icon" sizes="any" href="/favicon.ico"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-title" content="CloudMoon"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-
-  
-		<link rel="modulepreload" href="/_app/immutable/entry/start.CdcEhNxG.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/BDAUhLOJ.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/DniYV5OC.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/BN2GDCZF.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/8w7zzZdX.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/Dyc7bhRr.js">
-		<link rel="modulepreload" href="/_app/immutable/entry/app.CGLI4kr-.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/Bzak7iHL.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/DXs3EUbf.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/Dq68dD18.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/NCT-4E5c.js">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q30NXCCZNN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-Q30NXCCZNN');
-  </script>
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google Classroom</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-sveltekit-preload-data="hover">
-<div style="display: contents;height: 100%">
+<body>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="lock-icon">🔒</div>
+    <h1>Game Launcher</h1>
+    <p class="subtitle">Enter your access code to continue</p>
+    <div class="code-input">
+      <input type="text" id="accessCode" placeholder="Enter code" maxlength="3" inputmode="numeric" autofocus />
+    </div>
+    <div class="buttons">
+      <button class="enter-btn" id="enterBtn">Enter</button>
+    </div>
+    <div class="error-message" id="errorMessage"></div>
+  </div>
 
-  
-			<script>
-				{
-					__sveltekit_101d91 = {
-						base: ""
-					};
+  <!-- CrazyGames Launcher -->
+  <div id="launcherPage" class="launcher-container" style="display:none;">
+    <div class="container">
+      <h1>🎮 Crazy Games Launcher</h1>
+      <p class="description">Type a CrazyGames game name or paste a CrazyGames URL. We'll load it below.</p>
+      <div class="game-input">
+        <input type="text" id="gameName" placeholder="e.g. Rooftop Snipers or full CrazyGames URL" />
+        <button id="launchButton">Launch Game</button>
+      </div>
+      <h2>Currently Playing: <span id="currentGame">Ragdoll Archers</span></h2>
+      <div class="game-frame">
+        <iframe
+          id="gameFrame"
+          src="https://games.crazygames.com/en_US/ragdoll-archers/index.html"
+          allowfullscreen
+          scrolling="yes">
+        </iframe>
+      </div>
+      <div class="instructions">
+        <h2>📋 How to Use</h2>
+        <ul>
+          <li>Enter a game name (spaces → hyphens) or paste a CrazyGames URL.</li>
+          <li>Example: "Rooftop Snipers" → <code>rooftop-snipers</code></li>
+          <li>Full URL example: <code>https://www.crazygames.com/game/grow-a-garden---growden-io</code></li>
+        </ul>
+      </div>
+      <footer>
+        <button class="back-btn" data-back>← Back to Login</button>
+      </footer>
+    </div>
+  </div>
 
-					const element = document.currentScript.parentElement;
+  <!-- Growden Fullscreen -->
+  <div id="growdenPage" class="fullscreen-container" style="display:none;">
+    <div class="header">
+      <div class="game-title">🌱 Growden.io</div>
+      <button class="back-btn" data-back>← Back to Login</button>
+    </div>
+    <div class="fullscreen-frame">
+      <iframe id="growdenFrame" src="about:blank" allowfullscreen scrolling="yes"></iframe>
+    </div>
+  </div>
 
-					Promise.all([
-						import("/_app/immutable/entry/start.CdcEhNxG.js"),
-						import("/_app/immutable/entry/app.CGLI4kr-.js")
-					]).then(([kit, app]) => {
-						kit.start(app, element);
-					});
-				}
-			</script>
-		
+  <!-- PokeTube Fullscreen (replaces Roblox) -->
+  <div id="poketubePage" class="fullscreen-container" style="display:none;">
+    <div class="header">
+      <div class="game-title">📺 PokeTube</div>
+      <button class="back-btn" data-back>← Back to Login</button>
+    </div>
+    <div class="fullscreen-frame">
+      <iframe 
+        id="poketubeFrame" 
+        name="innerFrame" 
+        sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads" 
+        frameborder="0" 
+        allowfullscreen 
+        src="about:blank"
+        style="position:fixed; top:50px; left:0; bottom:0; right:0; width:100%; height:calc(100% - 50px); border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+      </iframe>
+    </div>
+  </div>
 
-</div>
+  <!-- CloudMoon Fullscreen -->
+  <div id="cloudmoonPage" class="fullscreen-container" style="display:none;">
+    <div class="header">
+      <div class="game-title">☁️ CloudMoon Gaming</div>
+      <button class="back-btn" data-back>← Back to Login</button>
+    </div>
+    <div class="fullscreen-frame">
+      <iframe
+        id="cloudmoonFrame"
+        src="about:blank"
+        allowfullscreen
+        scrolling="yes"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock"
+        allow="autoplay; fullscreen; gamepad; microphone; camera"
+        referrerpolicy="no-referrer">
+      </iframe>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
