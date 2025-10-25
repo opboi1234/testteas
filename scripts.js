@@ -12,18 +12,33 @@ let currentPage = 'login';
 const $ = (id) => document.getElementById(id);
 
 // -----------------------------
-// POPUP BLOCKER + about:blank HANDLER
+// ADVANCED POPUP INTERCEPTOR FOR CLOUDMOON
 // -----------------------------
-(function setupPopupHandler() {
+(function setupAdvancedPopupHandler() {
   const originalOpen = window.open;
   
   window.open = function(url, target, features) {
     console.warn('🚫 Popup intercepted:', url || 'unknown');
     
-    // Open in about:blank instead of blocking completely
+    // If on CloudMoon page, load URL in the iframe instead
+    if (currentPage === 'cloudmoon' && url && url !== 'about:blank') {
+      const cloudFrame = $('cloudmoonFrame');
+      if (cloudFrame) {
+        console.log('🎮 Loading game in iframe:', url);
+        cloudFrame.src = url;
+        return {
+          closed: false,
+          close() { console.log('Fake window close called'); },
+          focus() {},
+          blur() {},
+          postMessage() {}
+        };
+      }
+    }
+    
+    // For other cases, open in about:blank
     const newWindow = originalOpen('about:blank', target || '_blank', features);
     
-    // If URL was provided, try to navigate the blank window
     if (newWindow && url && url !== 'about:blank') {
       try {
         newWindow.location.href = url;
@@ -34,6 +49,17 @@ const $ = (id) => document.getElementById(id);
     
     return newWindow;
   };
+
+  // Also intercept window.location changes in iframe
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'navigate' && currentPage === 'cloudmoon') {
+      const cloudFrame = $('cloudmoonFrame');
+      if (cloudFrame && event.data.url) {
+        console.log('🎮 Message-based navigation:', event.data.url);
+        cloudFrame.src = event.data.url;
+      }
+    }
+  });
 })();
 
 // -----------------------------
@@ -75,7 +101,7 @@ function showPage(page) {
     case 'cloudmoon':
       $('cloudmoonPage').style.display = 'block';
       $('cloudmoonFrame').src = 'https://web.cloudmoonapp.com/';
-      console.log('🌙 CloudMoon loaded - popups will open in about:blank');
+      console.log('🌙 CloudMoon loaded - popups will redirect to iframe');
       break;
   }
 }
@@ -189,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showLogin();
 
   console.log('%c✅ Launcher Ready', 'color:#4fc3f7;font-size:18px;font-weight:bold;');
-  console.log('%cCloudMoon popups → about:blank', 'color:#ff6b6b;');
+  console.log('%cCloudMoon popups → iframe redirect active', 'color:#ff6b6b;');
 });
 
 // -----------------------------
