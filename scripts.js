@@ -48,7 +48,7 @@ function showPage(page) {
       // Initialize CloudMoon handler
       CloudMoonHandler.init();
       // Load CloudMoon main page
-      $('cloudmoonFrame').src = 'https://web.cloudmoonapp.com/';
+      $('cloudmoonFrame').src = 'https://www.easyfun.gg/cloud-games/clash-royale-cloud-online.html';
       console.log('🌙 CloudMoon loaded with enhanced popup handling');
       break;
       
