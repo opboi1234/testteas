@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Google Classroom</title>
+  <title>Game Launcher</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <!-- Login Page -->
   <div id="loginPage" class="login-container">
-    <div class="lock-icon">🔒</div>
+    <div class="lock-icon">\ud83d\udd12</div>
     <h1>Game Launcher</h1>
     <p class="subtitle">Enter your access code to continue</p>
     <div class="code-input">
@@ -24,7 +25,7 @@
   <!-- CrazyGames Launcher -->
   <div id="launcherPage" class="launcher-container" style="display:none;">
     <div class="container">
-      <h1>🎮 Crazy Games Launcher</h1>
+      <h1>\ud83c\udfae Crazy Games Launcher</h1>
       <p class="description">Type a CrazyGames game name or paste a CrazyGames URL. We'll load it below.</p>
       <div class="game-input">
         <input type="text" id="gameName" placeholder="e.g. Rooftop Snipers or full CrazyGames URL" />
@@ -40,15 +41,15 @@
         </iframe>
       </div>
       <div class="instructions">
-        <h2>📋 How to Use</h2>
+        <h2>\ud83d\udccb How to Use</h2>
         <ul>
-          <li>Enter a game name (spaces → hyphens) or paste a CrazyGames URL.</li>
-          <li>Example: "Rooftop Snipers" → <code>rooftop-snipers</code></li>
+          <li>Enter a game name (spaces \u2192 hyphens) or paste a CrazyGames URL.</li>
+          <li>Example: "Rooftop Snipers" \u2192 <code>rooftop-snipers</code></li>
           <li>Full URL example: <code>https://www.crazygames.com/game/grow-a-garden---growden-io</code></li>
         </ul>
       </div>
       <footer>
-        <button class="back-btn" data-back>← Back to Login</button>
+        <button class="back-btn" data-back>\u2190 Back to Login</button>
       </footer>
     </div>
   </div>
@@ -56,8 +57,8 @@
   <!-- Growden Fullscreen -->
   <div id="growdenPage" class="fullscreen-container" style="display:none;">
     <div class="header">
-      <div class="game-title">🌱 Growden.io</div>
-      <button class="back-btn" data-back>← Back to Login</button>
+      <div class="game-title">\ud83c\udf31 Growden.io</div>
+      <button class="back-btn" data-back>\u2190 Back to Login</button>
     </div>
     <div class="fullscreen-frame">
       <iframe id="growdenFrame" src="about:blank" allowfullscreen scrolling="yes"></iframe>
@@ -67,8 +68,8 @@
   <!-- PokeTube Fullscreen (replaces Roblox) -->
   <div id="poketubePage" class="fullscreen-container" style="display:none;">
     <div class="header">
-      <div class="game-title">📺 PokeTube</div>
-      <button class="back-btn" data-back>← Back to Login</button>
+      <div class="game-title">\ud83d\udcfa PokeTube</div>
+      <button class="back-btn" data-back>\u2190 Back to Login</button>
     </div>
     <div class="fullscreen-frame">
       <iframe 
@@ -86,8 +87,8 @@
   <!-- CloudMoon Fullscreen -->
   <div id="cloudmoonPage" class="fullscreen-container" style="display:none;">
     <div class="header">
-      <div class="game-title">☁️ CloudMoon Gaming</div>
-      <button class="back-btn" data-back>← Back to Login</button>
+      <div class="game-title">\u2601\ufe0f CloudMoon Gaming</div>
+      <button class="back-btn" data-back>\u2190 Back to Login</button>
     </div>
     <div class="fullscreen-frame">
       <iframe
@@ -97,6 +98,25 @@
         scrolling="yes"
         sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock allow-popups allow-popups-to-escape-sandbox"
         allow="autoplay; fullscreen; gamepad; microphone; camera"
+        referrerpolicy="no-referrer">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- UptoPlay Page -->
+  <div id="uptoplayPage" class="fullscreen-container" style="display:none;">
+    <div class="header">
+      <div class="game-title">\ud83d\ude80 UptoPlay</div>
+      <button class="back-btn" data-back>\u2190 Back to Login</button>
+    </div>
+    <div class="fullscreen-frame">
+      <iframe
+        id="uptoplayFrame"
+        src="about:blank"
+        allowfullscreen
+        scrolling="yes"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-pointer-lock allow-popups allow-popups-to-escape-sandbox"
+        allow="autoplay; fullscreen; gamepad"
         referrerpolicy="no-referrer">
       </iframe>
     </div>
